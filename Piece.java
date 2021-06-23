@@ -4,11 +4,10 @@ public abstract class Piece {
     private boolean isWhite;
     private boolean isAlive;
 
-    public Piece(int x, int y, boolean isWhite, boolean isAlive) {
+    public Piece(int x, int y, boolean isWhite) {
         this.x = x;
         this.y = y;
         this.isWhite = isWhite;
-        this.isAlive = isAlive;
     }
 
     public int getX() {

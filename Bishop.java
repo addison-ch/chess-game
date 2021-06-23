@@ -1,7 +1,7 @@
 public class Bishop extends Piece {
 
-    public Bishop(int x, int y, boolean isWhite, boolean isAlive) {
-        super(x, y, isWhite, isAlive);
+    public Bishop(int x, int y, boolean isWhite) {
+        super(x, y, isWhite);
     }
 
     @Override

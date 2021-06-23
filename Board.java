@@ -6,41 +6,41 @@ public class Board {
     // }
 
     public static void startBoard() {
-        board[0][0] = new Rook(0, 0, false, true);
-        board[0][1] = new Knight(0, 1, false, true);
-        board[0][2] = new Bishop(0, 2, false, true);
-        board[0][3] = new Queen(0, 3, false, true);
-        board[0][4] = new King(0, 4, false, true);
-        board[0][5] = new Bishop(0, 5, false, true);
-        board[0][6] = new Knight(0, 6, false, true);
-        board[0][7] = new Rook(0, 7, false, true);
+        board[0][1] = new Knight(0, 1, false);
+        board[0][0] = new Rook(0, 0, false);
+        board[0][2] = new Bishop(0, 2, false);
+        board[0][3] = new Queen(0, 3, false);
+        board[0][4] = new King(0, 4, false);
+        board[0][5] = new Bishop(0, 5, false);
+        board[0][6] = new Knight(0, 6, false);
+        board[0][7] = new Rook(0, 7, false);
 
-        board[1][0] = new Pawn(1, 0, false, true);
-        board[1][1] = new Pawn(1, 1, false, true);
-        board[1][2] = new Pawn(1, 2, false, true);
-        board[1][3] = new Pawn(1, 3, false, true);
-        board[1][4] = new Pawn(1, 4, false, true);
-        board[1][5] = new Pawn(1, 5, false, true);
-        board[1][6] = new Pawn(1, 6, false, true);
-        board[1][7] = new Pawn(1, 7, false, true);
+        board[1][1] = new Pawn(1, 1, false);
+        board[1][0] = new Pawn(1, 0, false);
+        board[1][2] = new Pawn(1, 2, false);
+        board[1][3] = new Pawn(1, 3, false);
+        board[1][4] = new Pawn(1, 4, false);
+        board[1][5] = new Pawn(1, 5, false);
+        board[1][6] = new Pawn(1, 6, false);
+        board[1][7] = new Pawn(1, 7, false);
 
-        board[7][0] = new Rook(7, 0, true, true);
-        board[7][1] = new Knight(7, 1, true, true);
-        board[7][2] = new Bishop(7, 2, true, true);
-        board[7][3] = new Queen(7, 3, true, true);
-        board[7][4] = new King(7, 4, true, true);
-        board[7][5] = new Bishop(7, 5, true, true);
-        board[7][6] = new Knight(7, 6, true, true);
-        board[7][7] = new Rook(7, 7, true, true);
+        board[7][1] = new Knight(7, 1, true);
+        board[7][0] = new Rook(7, 0, true);
+        board[7][2] = new Bishop(7, 2, true);
+        board[7][3] = new Queen(7, 3, true);
+        board[7][4] = new King(7, 4, true);
+        board[7][5] = new Bishop(7, 5, true);
+        board[7][6] = new Knight(7, 6, true);
+        board[7][7] = new Rook(7, 7, true);
 
-        board[6][0] = new Pawn(6, 0, true, true);
-        board[6][1] = new Pawn(6, 1, true, true);
-        board[6][2] = new Pawn(6, 2, true, true);
-        board[6][3] = new Pawn(6, 3, true, true);
-        board[6][4] = new Pawn(6, 4, true, true);
-        board[6][5] = new Pawn(6, 5, true, true);
-        board[6][6] = new Pawn(6, 6, true, true);
-        board[6][7] = new Pawn(6, 7, true, true);
+        board[6][1] = new Pawn(6, 1, true);
+        board[6][0] = new Pawn(6, 0, true);
+        board[6][2] = new Pawn(6, 2, true);
+        board[6][3] = new Pawn(6, 3, true);
+        board[6][4] = new Pawn(6, 4, true);
+        board[6][5] = new Pawn(6, 5, true);
+        board[6][6] = new Pawn(6, 6, true);
+        board[6][7] = new Pawn(6, 7, true);
 
         for (int i = 2; i < 6; i++) {
             for (int j = 0; j < 8; j++) {
@@ -199,65 +199,53 @@ public class Board {
 
         if (board[secondX][secondY] instanceof Pawn && board[secondX][secondY].getIsWhite() == true) {
             if (secondX == 0) {
-                board[secondX][secondY] = new Queen(0, secondY, true, true);
+                board[secondX][secondY] = new Queen(0, secondY, true);
             }
         } else if (board[secondX][secondY] instanceof Pawn && board[secondX][secondY].getIsWhite() == false) {
             if (secondX == 7) {
-                board[secondX][secondY] = new Queen(7, secondY, false, true);
+                board[secondX][secondY] = new Queen(7, secondY, false);
             }
         }
+
     }
 
     public static boolean kingInDanger(int x1, int y1, int x, int y, boolean isWhite) { // checks if move exposes king
 
-        if (board[x1][y1] instanceof King) {
-            for (int i = 0; i < 8; i++) {
-                for (int f = 0; f < 8; f++) {
-                    if (board[i][f] != null) {
-                        if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(x, y)) {
-                            return true;
-                        }
-                    }
+        Piece temp = board[x][y];
+        board[x][y] = board[x1][y1];
+        board[x1][y1] = null;
+        board[x][y].setX(x);
+        board[x][y].setY(y);
+        int kingX = -1;
+        int kingY = -1;
+        for (int j = 0; j < 8; j++) {
+            for (int k = 0; k < 8; k++) {
+                if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
+                    kingX = j;
+                    kingY = k;
                 }
             }
-            return false;
-        } else {
-            Piece temp = board[x][y];
-            board[x][y] = board[x1][y1];
-            board[x1][y1] = null;
-            board[x][y].setX(x);
-            board[x][y].setY(y);
-            int kingX = -1;
-            int kingY = -1;
-            for (int j = 0; j < 8; j++) {
-                for (int k = 0; k < 8; k++) {
-                    if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
-                        kingX = j;
-                        kingY = k;
-                    }
-                }
-            }
-
-            for (int i = 0; i < 8; i++) {
-                for (int f = 0; f < 8; f++) {
-                    if (board[i][f] != null) {
-                        if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(kingX, kingY)) {
-                            board[x1][y1] = board[x][y];
-                            board[x][y] = temp;
-                            board[x1][y1].setX(x1);
-                            board[x1][y1].setY(y1);
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            board[x1][y1] = board[x][y];
-            board[x][y] = temp;
-            board[x1][y1].setX(x1);
-            board[x1][y1].setY(y1);
-            return false;
         }
+
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(kingX, kingY)) {
+                        board[x1][y1] = board[x][y];
+                        board[x][y] = temp;
+                        board[x1][y1].setX(x1);
+                        board[x1][y1].setY(y1);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        board[x1][y1] = board[x][y];
+        board[x][y] = temp;
+        board[x1][y1].setX(x1);
+        board[x1][y1].setY(y1);
+        return false;
     }
 
     public static boolean kingInCheck(boolean isWhite) {// checks if you put enemy king in check
@@ -341,5 +329,35 @@ public class Board {
             }
         }
         return true;
+    }
+
+    public static boolean isStalemate(boolean isWhite) {
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null && board[i][f].getIsWhite() == isWhite) {
+                    for (int x = 0; x < 8; x++) {
+                        for (int y = 0; y < 8; y++) {
+                            if (board[i][f].possibleMove(x, y)
+                                    && !kingInDanger(board[i][f].getX(), board[i][f].getY(), x, y, isWhite)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static int total() {
+        int c = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    c += 1;
+                }
+            }
+        }
+        return c;
     }
 }
