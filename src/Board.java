@@ -256,6 +256,26 @@ public class Board {
     }
 
     public static boolean kingInCheck(boolean isWhite) {
-        return true;
+        int xk = -1;
+        int yk = -1;
+        for (int j = 0; j < 8; j++) {
+            for (int k = 0; k < 8; k++) {
+                if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
+                    xk = j;
+                    yk = k;
+                }
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(xk, yk)) {
+
+                        return true;
+                    }
+                }
+            }
+        }
+
     }
 }
