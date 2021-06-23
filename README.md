@@ -12,5 +12,5 @@ $ java Game
 ```
 
 ### Pictures
-![alt text](screenshots/start.png)
+![Screenshot](screenshots/start.png)
 
