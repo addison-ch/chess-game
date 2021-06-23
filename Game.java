@@ -31,8 +31,21 @@ public class Game {
                     if (inCheck) {
                         System.out.println("You are currently in CHECK.");
                     }
-                    String move = inputs.nextLine();
 
+                    if (inCheck) {
+                        if (Board.isMated(isWhite)) {
+                            System.out.println("Checkmate has occured.");
+                            System.out.printf("%s has LOST \n", isWhite ? "WHITE" : "BLACK");
+                            System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
+                            String end = inputs.nextLine();
+                            if (end.equals("RESTART")) {
+                                break;
+                            } else {
+                                System.exit(0);
+                            }
+                        }
+                    }
+                    String move = inputs.nextLine();
                     while (!Board.validMove(move, isWhite, inCheck)) {
                         System.out.println("Please enter a valid move.");
                         move = inputs.nextLine();
@@ -43,17 +56,6 @@ public class Game {
 
                     inCheck = Board.kingInCheck(isWhite);
 
-                    if (Board.isCheckmate()) {
-                        System.out.println("Checkmate has occured.");
-                        System.out.printf("%s has WON \n", isWhite ? "WHITE" : "BLACK");
-                        System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
-                        String end = inputs.nextLine();
-                        if (end.equals("RESTART")) {
-                            break;
-                        } else {
-                            System.exit(0);
-                        }
-                    }
                 }
             }
 
