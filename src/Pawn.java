@@ -15,6 +15,18 @@ public class Pawn extends Piece {
 
     @Override
     public boolean possibleMove(int x, int y) {
+        if (Board.board[x][y] != null) {
+            if (Board.board[x][y].getIsWhite() == this.getIsWhite()) {
+                return false;
+            }
+        }
+        if (Board.kingInDanger(this.getX(), this.getY(), x, y, this.getIsWhite())) {
+
+            return false;
+        }
+        if (this.getX() == x && this.getY() == y) {
+            return false;
+        }
         if (this.getIsWhite() == true && Board.board[x][y] == null) {
             if (this.getX() == 6 && x == 4 && y == this.getY()) {
                 if (Board.isNotBlocked(this.getX(), this.getY(), x, y)) {

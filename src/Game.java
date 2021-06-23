@@ -6,12 +6,14 @@ public class Game {
         Scanner inputs = new Scanner(System.in);
 
         while (true) {
-            System.out.println("How to play:");
-            System.out.println("Enter the name of a piece as seen on the board then");
-            System.out.println("provide a space and then enter a valid spot to move. For example, '11 11'");
-            System.out.println(
-                    "Pawns auto-promote to queens. The new queens are indicated by an asterix symbol. Like, \"wP3*\"");
-            System.out.println("type in \"START\" to continue");
+            System.out.println("* How to play:");
+            System.out.println("* Enter the piece you want to move by referring to its tile then");
+            System.out.println("* enter a space and then provide a valid tile to move to.");
+            System.out.println("* Tiles must be referred to by its coordinate, made of 2 digits.");
+            System.out.println("* First digit is the vertical location, then second digit is the horizontal");
+            System.out.println("* EXAMPLE: '60 40' moves the left most white pawn up two units.");
+            System.out.println("* Pawns auto-promote to queens. CAPITALS are WHITE. LOWER case are BLACK.");
+            System.out.println("* type in \"START\" to continue");
 
             String starting = inputs.nextLine();
             if (starting.equals("START")) {
@@ -26,10 +28,12 @@ public class Game {
                     }
                     Board.print();
                     System.out.printf("Enter a move, %s turn \n", isWhite ? "WHITE" : "BLACK");
-
+                    if (inCheck) {
+                        System.out.println("You are currently in CHECK.");
+                    }
                     String move = inputs.nextLine();
 
-                    while (!Board.validMove(move, isWhite)) {
+                    while (!Board.validMove(move, isWhite, inCheck)) {
                         System.out.println("Please enter a valid move.");
                         move = inputs.nextLine();
                     }
@@ -38,6 +42,18 @@ public class Game {
                     turn += 1;
 
                     inCheck = Board.kingInCheck(isWhite);
+
+                    if (Board.isCheckmate()) {
+                        System.out.println("Checkmate has occured.");
+                        System.out.printf("%s has WON \n", isWhite ? "WHITE" : "BLACK");
+                        System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.")
+                        String end = inputs.nextLine();
+                        if (end.equals("RESTART")){
+                            break;
+                        } else{
+                            System.exit(0);
+                        }
+                    }
                 }
             }
 

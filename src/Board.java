@@ -67,7 +67,7 @@ public class Board {
         System.out.println("[:)]  0   1   2   3   4   5   6   7 ");
     }
 
-    public static boolean validMove(String move, boolean isWhite) {
+    public static boolean validMove(String move, boolean isWhite, boolean inCheck) {
         // String[] validPieces = { "wB", "bB", "wP", "bP", "wK", "bK", "wN", "bN",
         // "wQ", "bQ", "wR", "bR" };
         String[] splitMove = move.split(" ");
@@ -115,9 +115,11 @@ public class Board {
             return false;
         }
 
-        if (!selected.possibleMove(secondX, secondY)) {
-            System.out.println("Piece can not do that");
-            return false;
+        if (inCheck) {
+            if (inCheckTest(firstX, firstY, secondX, secondY, isWhite)) {
+                System.out.println("King is still in check");
+                return false;
+            }
         }
         if (other != null) {
             if (other.getIsWhite() == isWhite) {
@@ -130,7 +132,10 @@ public class Board {
             System.out.println("Can not leave King in check");
             return false;
         }
-
+        if (!selected.possibleMove(secondX, secondY)) {
+            System.out.println("Piece can not do that");
+            return false;
+        }
         return true;
 
     }
@@ -203,7 +208,7 @@ public class Board {
         }
     }
 
-    public static boolean kingInDanger(int x1, int y1, int x, int y, boolean isWhite) {
+    public static boolean kingInDanger(int x1, int y1, int x, int y, boolean isWhite) { // checks if move exposes king
 
         if (board[x1][y1] instanceof King) {
             for (int i = 0; i < 8; i++) {
@@ -222,13 +227,13 @@ public class Board {
             board[x1][y1] = null;
             board[x][y].setX(x);
             board[x][y].setY(y);
-            int xk = -1;
-            int yk = -1;
+            int kingX = -1;
+            int kingY = -1;
             for (int j = 0; j < 8; j++) {
                 for (int k = 0; k < 8; k++) {
                     if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
-                        xk = j;
-                        yk = k;
+                        kingX = j;
+                        kingY = k;
                     }
                 }
             }
@@ -236,7 +241,7 @@ public class Board {
             for (int i = 0; i < 8; i++) {
                 for (int f = 0; f < 8; f++) {
                     if (board[i][f] != null) {
-                        if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(xk, yk)) {
+                        if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(kingX, kingY)) {
                             board[x1][y1] = board[x][y];
                             board[x][y] = temp;
                             board[x1][y1].setX(x1);
@@ -255,21 +260,21 @@ public class Board {
         }
     }
 
-    public static boolean kingInCheck(boolean isWhite) {
-        int xk = -1;
-        int yk = -1;
+    public static boolean kingInCheck(boolean isWhite) {// checks if you put enemy king in check
+        int kingX = -1;
+        int kingY = -1;
         for (int j = 0; j < 8; j++) {
             for (int k = 0; k < 8; k++) {
-                if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
-                    xk = j;
-                    yk = k;
+                if (board[j][k] instanceof King && board[j][k].getIsWhite() != isWhite) {
+                    kingX = j;
+                    kingY = k;
                 }
             }
         }
         for (int i = 0; i < 8; i++) {
             for (int f = 0; f < 8; f++) {
                 if (board[i][f] != null) {
-                    if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(xk, yk)) {
+                    if (board[i][f].getIsWhite() == isWhite && board[i][f].possibleMove(kingX, kingY)) {
 
                         return true;
                     }
@@ -277,5 +282,50 @@ public class Board {
             }
         }
 
+        return false;
+
+    }
+
+    public static boolean inCheckTest(int firstX, int firstY, int secondX, int secondY, boolean isWhite) {
+        Piece temp = board[secondX][secondY];// tests if move makes king out of check
+        board[secondX][secondY] = board[firstX][firstY];
+        board[firstX][firstY] = null;
+        board[secondX][secondY].setX(secondX);
+        board[secondX][secondY].setY(secondY);
+
+        int kingX = -1;
+        int kingY = -1;
+        for (int j = 0; j < 8; j++) {
+            for (int k = 0; k < 8; k++) {
+                if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
+                    kingX = j;
+                    kingY = k;
+                }
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(kingX, kingY)) {
+
+                        board[firstX][firstY] = board[secondX][secondY];
+                        board[secondX][secondY] = temp;
+                        board[firstX][firstY].setX(firstX);
+                        board[firstX][firstY].setY(firstY);
+                        return true;
+                    }
+                }
+            }
+        }
+        board[firstX][firstY] = board[secondX][secondY];
+        board[secondX][secondY] = temp;
+        board[firstX][firstY].setX(firstX);
+        board[firstX][firstY].setY(firstY);
+        return false;
+
+    }
+
+    public static boolean isCheckmate() {
+        return true;
     }
 }
