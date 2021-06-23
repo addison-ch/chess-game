@@ -6,7 +6,7 @@ Two player game of chess. checking, check-mating, stalemating fully implemented.
 ## Instructions
 ```sh
 $ git clone https://github.com/addison-ch/chess-game/
-$ cd Chess/src
+$ cd chess-game/src
 $ javac Game.java
 $ java Game
 ```
