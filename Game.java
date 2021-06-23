@@ -35,7 +35,7 @@ public class Game {
                     if (inCheck) {
                         if (Board.isMated(isWhite)) {
                             System.out.println("Checkmate has occured.");
-                            System.out.printf("%s has WON \n", isWhite ? "WHITE" : "BLACK");
+                            System.out.printf("%s has LOST \n", isWhite ? "WHITE" : "BLACK");
                             System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
                             String end = inputs.nextLine();
                             if (end.equals("RESTART")) {

@@ -331,8 +331,8 @@ public class Board {
                 if (board[i][f] != null && board[i][f].getIsWhite() == isWhite) {
                     for (int x = 0; x < 8; x++) {
                         for (int y = 0; y < 8; y++) {
-                            if (board[i][f].possibleMove(i, f)
-                                    && !kingInDanger(board[i][f].getX(), board[i][f].getY(), x, y, isWhite)) {
+                            if (board[i][f].possibleMove(x, y)
+                                    && !inCheckTest(board[i][f].getX(), board[i][f].getY(), x, y, isWhite)) {
                                 return false;
                             }
                         }
