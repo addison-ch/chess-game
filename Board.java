@@ -342,4 +342,22 @@ public class Board {
         }
         return true;
     }
+
+    public static boolean isStalemate(boolean isWhite) {
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null && board[i][f].getIsWhite() == isWhite) {
+                    for (int x = 0; x < 8; x++) {
+                        for (int y = 0; y < 8; y++) {
+                            if (board[i][f].possibleMove(x, y)
+                                    && !kingInDanger(board[i][f].getX(), board[i][f].getY(), x, y, isWhite)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }

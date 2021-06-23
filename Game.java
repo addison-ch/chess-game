@@ -20,6 +20,7 @@ public class Game {
                 Board.startBoard();
                 int turn = 1;
                 boolean inCheck = false;
+                boolean isStalemate = false;
                 while (true) {
 
                     boolean isWhite = true;
@@ -36,6 +37,18 @@ public class Game {
                         if (Board.isMated(isWhite)) {
                             System.out.println("Checkmate has occured.");
                             System.out.printf("%s has LOST \n", isWhite ? "WHITE" : "BLACK");
+                            System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
+                            String end = inputs.nextLine();
+                            if (end.equals("RESTART")) {
+                                break;
+                            } else {
+                                System.exit(0);
+                            }
+                        }
+                    } else {
+                        if (Board.isStalemate(isWhite)) {
+                            System.out.println("Stalemate has occured.");
+                            System.out.println("The game is technically a tie lol");
                             System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
                             String end = inputs.nextLine();
                             if (end.equals("RESTART")) {
