@@ -13,6 +13,6 @@ $ java Game
 
 ### Pictures
 ![Screenshot](screenshots/start.png)
-![Screenshot](checkmate/start.png)
+![Screenshot](screenshots/checkmate.png)
 
 
