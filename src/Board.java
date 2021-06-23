@@ -264,6 +264,7 @@ public class Board {
                 if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
                     xk = j;
                     yk = k;
+<<<<<<< HEAD
                 }
             }
         }
@@ -298,12 +299,27 @@ public class Board {
                         if (board[i][f].canMove() == true) {
                             return false;
                         }
+=======
+                }
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(xk, yk)) {
+
+                        return true;
+>>>>>>> parent of b32de7f (checking mechanic implemented)
                     }
                 }
             }
             return true;
         }
+<<<<<<< HEAD
 =======
+>>>>>>> parent of b32de7f (checking mechanic implemented)
+=======
+
 >>>>>>> parent of b32de7f (checking mechanic implemented)
     }
 }

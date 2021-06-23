@@ -39,6 +39,7 @@ public class Game {
 
                     inCheck = Board.kingInCheck(isWhite);
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if (inCheck) {
                         if (Board.isCheckmate(isWhite)) {
                             System.out.println("Checkmate has occured.");
@@ -52,6 +53,8 @@ public class Game {
                             }
                         }
                     }
+=======
+>>>>>>> parent of b32de7f (checking mechanic implemented)
 =======
 >>>>>>> parent of b32de7f (checking mechanic implemented)
                 }
