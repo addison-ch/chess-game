@@ -22,7 +22,7 @@ public class Game {
                 int pieces = 0;
                 int sCounter = 0;
                 boolean inCheck = false;
-                boolean isStalemate = false;
+
                 while (true) {
 
                     boolean isWhite = true;
@@ -30,7 +30,7 @@ public class Game {
                         isWhite = false;
                     }
                     Board.print();
-                    System.out.printf("Enter a move, %s turn \n", isWhite ? "WHITE" : "BLACK");
+                    System.out.printf("Enter a move, %s turn \n", isWhite ? "WHITE (uppercase)" : "BLACK (lowercase)");
                     if (inCheck) {
                         System.out.println("You are currently in CHECK.");
                     }

@@ -1,7 +1,7 @@
 public class Knight extends Piece {
 
-    public Knight(int x, int y, boolean isWhite, boolean isAlive) {
-        super(x, y, isWhite, isAlive);
+    public Knight(int x, int y, boolean isWhite) {
+        super(x, y, isWhite);
     }
 
     @Override

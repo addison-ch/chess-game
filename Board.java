@@ -6,41 +6,41 @@ public class Board {
     // }
 
     public static void startBoard() {
-        board[0][0] = new Rook(0, 0, false, true);
-        board[0][1] = new Knight(0, 1, false, true);
-        board[0][2] = new Bishop(0, 2, false, true);
-        board[0][3] = new Queen(0, 3, false, true);
-        board[0][4] = new King(0, 4, false, true);
-        board[0][5] = new Bishop(0, 5, false, true);
-        board[0][6] = new Knight(0, 6, false, true);
-        board[0][7] = new Rook(0, 7, false, true);
+        board[0][1] = new Knight(0, 1, false);
+        board[0][0] = new Rook(0, 0, false);
+        board[0][2] = new Bishop(0, 2, false);
+        board[0][3] = new Queen(0, 3, false);
+        board[0][4] = new King(0, 4, false);
+        board[0][5] = new Bishop(0, 5, false);
+        board[0][6] = new Knight(0, 6, false);
+        board[0][7] = new Rook(0, 7, false);
 
-        board[1][0] = new Pawn(1, 0, false, true);
-        board[1][1] = new Pawn(1, 1, false, true);
-        board[1][2] = new Pawn(1, 2, false, true);
-        board[1][3] = new Pawn(1, 3, false, true);
-        board[1][4] = new Pawn(1, 4, false, true);
-        board[1][5] = new Pawn(1, 5, false, true);
-        board[1][6] = new Pawn(1, 6, false, true);
-        board[1][7] = new Pawn(1, 7, false, true);
+        board[1][1] = new Pawn(1, 1, false);
+        board[1][0] = new Pawn(1, 0, false);
+        board[1][2] = new Pawn(1, 2, false);
+        board[1][3] = new Pawn(1, 3, false);
+        board[1][4] = new Pawn(1, 4, false);
+        board[1][5] = new Pawn(1, 5, false);
+        board[1][6] = new Pawn(1, 6, false);
+        board[1][7] = new Pawn(1, 7, false);
 
-        board[7][0] = new Rook(7, 0, true, true);
-        board[7][1] = new Knight(7, 1, true, true);
-        board[7][2] = new Bishop(7, 2, true, true);
-        board[7][3] = new Queen(7, 3, true, true);
-        board[7][4] = new King(7, 4, true, true);
-        board[7][5] = new Bishop(7, 5, true, true);
-        board[7][6] = new Knight(7, 6, true, true);
-        board[7][7] = new Rook(7, 7, true, true);
+        board[7][1] = new Knight(7, 1, true);
+        board[7][0] = new Rook(7, 0, true);
+        board[7][2] = new Bishop(7, 2, true);
+        board[7][3] = new Queen(7, 3, true);
+        board[7][4] = new King(7, 4, true);
+        board[7][5] = new Bishop(7, 5, true);
+        board[7][6] = new Knight(7, 6, true);
+        board[7][7] = new Rook(7, 7, true);
 
-        board[6][0] = new Pawn(6, 0, true, true);
-        board[6][1] = new Pawn(6, 1, true, true);
-        board[6][2] = new Pawn(6, 2, true, true);
-        board[6][3] = new Pawn(6, 3, true, true);
-        board[6][4] = new Pawn(6, 4, true, true);
-        board[6][5] = new Pawn(6, 5, true, true);
-        board[6][6] = new Pawn(6, 6, true, true);
-        board[6][7] = new Pawn(6, 7, true, true);
+        board[6][1] = new Pawn(6, 1, true);
+        board[6][0] = new Pawn(6, 0, true);
+        board[6][2] = new Pawn(6, 2, true);
+        board[6][3] = new Pawn(6, 3, true);
+        board[6][4] = new Pawn(6, 4, true);
+        board[6][5] = new Pawn(6, 5, true);
+        board[6][6] = new Pawn(6, 6, true);
+        board[6][7] = new Pawn(6, 7, true);
 
         for (int i = 2; i < 6; i++) {
             for (int j = 0; j < 8; j++) {
@@ -199,11 +199,11 @@ public class Board {
 
         if (board[secondX][secondY] instanceof Pawn && board[secondX][secondY].getIsWhite() == true) {
             if (secondX == 0) {
-                board[secondX][secondY] = new Queen(0, secondY, true, true);
+                board[secondX][secondY] = new Queen(0, secondY, true);
             }
         } else if (board[secondX][secondY] instanceof Pawn && board[secondX][secondY].getIsWhite() == false) {
             if (secondX == 7) {
-                board[secondX][secondY] = new Queen(7, secondY, false, true);
+                board[secondX][secondY] = new Queen(7, secondY, false);
             }
         }
 
