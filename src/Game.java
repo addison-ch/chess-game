@@ -42,16 +42,17 @@ public class Game {
                     turn += 1;
 
                     inCheck = Board.kingInCheck(isWhite);
-
-                    if (Board.isCheckmate()) {
-                        System.out.println("Checkmate has occured.");
-                        System.out.printf("%s has WON \n", isWhite ? "WHITE" : "BLACK");
-                        System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.")
-                        String end = inputs.nextLine();
-                        if (end.equals("RESTART")){
-                            break;
-                        } else{
-                            System.exit(0);
+                    if (inCheck) {
+                        if (Board.isCheckmate(isWhite)) {
+                            System.out.println("Checkmate has occured.");
+                            System.out.printf("%s has WON \n", isWhite ? "WHITE" : "BLACK");
+                            System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
+                            String end = inputs.nextLine();
+                            if (end.equals("RESTART")) {
+                                break;
+                            } else {
+                                System.exit(0);
+                            }
                         }
                     }
                 }

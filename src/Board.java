@@ -172,6 +172,7 @@ public class Board {
             if (board[x1][y1] != null) {
                 return false;
             }
+
         }
         return true;
     }
@@ -325,7 +326,29 @@ public class Board {
 
     }
 
-    public static boolean isCheckmate() {
-        return true;
+    public static boolean isCheckmate(boolean isWhite) {
+        if (isWhite == true) {
+            for (int i = 0; i < 8; i++) {
+                for (int f = 0; f < 8; f++) {
+                    if (board[i][f] != null && board[i][f].getIsWhite() != true) {
+                        if (board[i][f].canMove() == true) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        } else {
+            for (int i = 0; i < 8; i++) {
+                for (int f = 0; f < 8; f++) {
+                    if (board[i][f] != null && board[i][f].getIsWhite() == true) {
+                        if (board[i][f].canMove() == true) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

@@ -46,4 +46,18 @@ public abstract class Piece {
     public abstract boolean possibleMove(int x, int y);
 
     public abstract String toString();
+
+    public boolean canMove() {
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (this.possibleMove(i, f)) {
+                    if (!Board.inCheckTest(this.getX(), this.getY(), i, f, this.getIsWhite())) {
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
 }

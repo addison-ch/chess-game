@@ -20,10 +20,7 @@ public class Rook extends Piece {
                 return false;
             }
         }
-        if (Board.kingInDanger(this.getX(), this.getY(), x, y, this.getIsWhite())) {
 
-            return false;
-        }
         if (this.getX() == x && this.getY() == y) {
             return false;
         }
