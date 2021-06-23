@@ -19,6 +19,8 @@ public class Game {
             if (starting.equals("START")) {
                 Board.startBoard();
                 int turn = 1;
+                int pieces = 0;
+                int sCounter = 0;
                 boolean inCheck = false;
                 boolean isStalemate = false;
                 while (true) {
@@ -32,7 +34,17 @@ public class Game {
                     if (inCheck) {
                         System.out.println("You are currently in CHECK.");
                     }
-
+                    if (sCounter >= 50) {
+                        System.out.println("Stalemate has occured.");
+                        System.out.println("The game is technically a tie lol");
+                        System.out.printf("Type 'RESTART' to return to game start. Type anything else to exit.");
+                        String end = inputs.nextLine();
+                        if (end.equals("RESTART")) {
+                            break;
+                        } else {
+                            System.exit(0);
+                        }
+                    }
                     if (inCheck) {
                         if (Board.isMated(isWhite)) {
                             System.out.println("Checkmate has occured.");
@@ -67,6 +79,12 @@ public class Game {
                     Board.playMove(move);
                     turn += 1;
 
+                    if (Board.total() != pieces) {
+                        sCounter = 0;
+                        pieces = Board.total();
+                    } else {
+                        sCounter += 1;
+                    }
                     inCheck = Board.kingInCheck(isWhite);
 
                 }

@@ -206,58 +206,46 @@ public class Board {
                 board[secondX][secondY] = new Queen(7, secondY, false, true);
             }
         }
+
     }
 
     public static boolean kingInDanger(int x1, int y1, int x, int y, boolean isWhite) { // checks if move exposes king
 
-        if (board[x1][y1] instanceof King) {
-            for (int i = 0; i < 8; i++) {
-                for (int f = 0; f < 8; f++) {
-                    if (board[i][f] != null) {
-                        if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(x, y)) {
-                            return true;
-                        }
-                    }
+        Piece temp = board[x][y];
+        board[x][y] = board[x1][y1];
+        board[x1][y1] = null;
+        board[x][y].setX(x);
+        board[x][y].setY(y);
+        int kingX = -1;
+        int kingY = -1;
+        for (int j = 0; j < 8; j++) {
+            for (int k = 0; k < 8; k++) {
+                if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
+                    kingX = j;
+                    kingY = k;
                 }
             }
-            return false;
-        } else {
-            Piece temp = board[x][y];
-            board[x][y] = board[x1][y1];
-            board[x1][y1] = null;
-            board[x][y].setX(x);
-            board[x][y].setY(y);
-            int kingX = -1;
-            int kingY = -1;
-            for (int j = 0; j < 8; j++) {
-                for (int k = 0; k < 8; k++) {
-                    if (board[j][k] instanceof King && board[j][k].getIsWhite() == isWhite) {
-                        kingX = j;
-                        kingY = k;
-                    }
-                }
-            }
-
-            for (int i = 0; i < 8; i++) {
-                for (int f = 0; f < 8; f++) {
-                    if (board[i][f] != null) {
-                        if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(kingX, kingY)) {
-                            board[x1][y1] = board[x][y];
-                            board[x][y] = temp;
-                            board[x1][y1].setX(x1);
-                            board[x1][y1].setY(y1);
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            board[x1][y1] = board[x][y];
-            board[x][y] = temp;
-            board[x1][y1].setX(x1);
-            board[x1][y1].setY(y1);
-            return false;
         }
+
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    if (board[i][f].getIsWhite() != isWhite && board[i][f].possibleMove(kingX, kingY)) {
+                        board[x1][y1] = board[x][y];
+                        board[x][y] = temp;
+                        board[x1][y1].setX(x1);
+                        board[x1][y1].setY(y1);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        board[x1][y1] = board[x][y];
+        board[x][y] = temp;
+        board[x1][y1].setX(x1);
+        board[x1][y1].setY(y1);
+        return false;
     }
 
     public static boolean kingInCheck(boolean isWhite) {// checks if you put enemy king in check
@@ -359,5 +347,17 @@ public class Board {
             }
         }
         return true;
+    }
+
+    public static int total() {
+        int c = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int f = 0; f < 8; f++) {
+                if (board[i][f] != null) {
+                    c += 1;
+                }
+            }
+        }
+        return c;
     }
 }
