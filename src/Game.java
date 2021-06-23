@@ -6,14 +6,12 @@ public class Game {
         Scanner inputs = new Scanner(System.in);
 
         while (true) {
-            System.out.println("* How to play:");
-            System.out.println("* Enter the piece you want to move by referring to its tile then");
-            System.out.println("* enter a space and then provide a valid tile to move to.");
-            System.out.println("* Tiles must be referred to by its coordinate, made of 2 digits.");
-            System.out.println("* First digit is the vertical location, then second digit is the horizontal");
-            System.out.println("* EXAMPLE: '60 40' moves the left most white pawn up two units.");
-            System.out.println("* Pawns auto-promote to queens. CAPITALS are WHITE. LOWER case are BLACK.");
-            System.out.println("* type in \"START\" to continue");
+            System.out.println("How to play:");
+            System.out.println("Enter the name of a piece as seen on the board then");
+            System.out.println("provide a space and then enter a valid spot to move. For example, '11 11'");
+            System.out.println(
+                    "Pawns auto-promote to queens. The new queens are indicated by an asterix symbol. Like, \"wP3*\"");
+            System.out.println("type in \"START\" to continue");
 
             String starting = inputs.nextLine();
             if (starting.equals("START")) {
@@ -28,12 +26,10 @@ public class Game {
                     }
                     Board.print();
                     System.out.printf("Enter a move, %s turn \n", isWhite ? "WHITE" : "BLACK");
-                    if (inCheck) {
-                        System.out.println("You are currently in CHECK.");
-                    }
+
                     String move = inputs.nextLine();
 
-                    while (!Board.validMove(move, isWhite, inCheck)) {
+                    while (!Board.validMove(move, isWhite)) {
                         System.out.println("Please enter a valid move.");
                         move = inputs.nextLine();
                     }
@@ -42,6 +38,7 @@ public class Game {
                     turn += 1;
 
                     inCheck = Board.kingInCheck(isWhite);
+<<<<<<< HEAD
                     if (inCheck) {
                         if (Board.isCheckmate(isWhite)) {
                             System.out.println("Checkmate has occured.");
@@ -55,6 +52,8 @@ public class Game {
                             }
                         }
                     }
+=======
+>>>>>>> parent of b32de7f (checking mechanic implemented)
                 }
             }
 

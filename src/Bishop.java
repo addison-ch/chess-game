@@ -16,6 +16,7 @@ public class Bishop extends Piece {
 
     @Override
     public boolean possibleMove(int x, int y) {
+<<<<<<< HEAD
 
         if (Board.board[x][y] != null) {
             if (Board.board[x][y].getIsWhite() == this.getIsWhite()) {
@@ -26,6 +27,8 @@ public class Bishop extends Piece {
         if (this.getX() == x && this.getY() == y) {
             return false;
         }
+=======
+>>>>>>> parent of b32de7f (checking mechanic implemented)
         if (Math.abs(this.getX() - x) != Math.abs(this.getY() - y)) {
             return false;
         }
@@ -33,7 +36,7 @@ public class Bishop extends Piece {
         if (Board.isNotBlocked(this.getX(), this.getY(), x, y)) {
             return true;
         } else {
-
+            System.out.println("Path is blocked");
             return false;
         }
     }

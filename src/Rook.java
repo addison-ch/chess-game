@@ -15,6 +15,7 @@ public class Rook extends Piece {
 
     @Override
     public boolean possibleMove(int x, int y) {
+<<<<<<< HEAD
         if (Board.board[x][y] != null) {
             if (Board.board[x][y].getIsWhite() == this.getIsWhite()) {
                 return false;
@@ -24,6 +25,8 @@ public class Rook extends Piece {
         if (this.getX() == x && this.getY() == y) {
             return false;
         }
+=======
+>>>>>>> parent of b32de7f (checking mechanic implemented)
         if (Math.abs(this.getX() - x) != 0 && Math.abs(this.getY() - y) != 0) {
             return false;
         }
@@ -32,6 +35,7 @@ public class Rook extends Piece {
             return true;
         }
 
+        System.out.println("Path is blocked");
         return false;
     }
 
