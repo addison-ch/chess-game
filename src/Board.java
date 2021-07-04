@@ -362,4 +362,8 @@ public class Board {
         }
         return c;
     }
+
+    public static void minimax() {
+
+    }
 }
